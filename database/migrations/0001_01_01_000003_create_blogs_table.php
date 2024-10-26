@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
+            $table->string('title');
+            $table->string('content');
+            $table->string('author');
+            $table->string('tag')->nullable();
+            $table->timestamps('Published Date');
+            $table->string('published')->nullable();
+            $table->string('draft')->nullable();
         });
     }
 };
