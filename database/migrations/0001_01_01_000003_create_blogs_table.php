@@ -4,22 +4,25 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateBlogsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('content');
+            $table->text('content'); // Changed to text for larger content
             $table->string('author');
-            $table->string('tag')->nullable();
-            $table->timestamps('Published Date');
-            $table->string('published')->nullable();
+            $table->string('tags')->nullable(); // Changed to tags
+            $table->timestamp('published_at')->useCurrent(); // Correct usage
             $table->string('draft')->nullable();
+            $table->timestamps(); // Creates created_at and updated_at columns
         });
     }
-};
+
+    public function down()
+    {
+        Schema::dropIfExists('blogs');
+    }
+}
+
